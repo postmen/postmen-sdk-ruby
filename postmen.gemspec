@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.licenses = ['MIT']
   s.summary = 'Postmen'
   s.description = 'Developed for easy integration with Postmen'
-  s.required_ruby_version = '>= 2.1.0'
+  s.required_ruby_version = '>= 2.2.0'
 
   s.author = ['postmen.com']
   s.email = ['support@postmen.com']
