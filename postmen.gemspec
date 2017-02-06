@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'dry-configurable', '~> 0.5'
   s.add_dependency 'dry-struct', '~> 0.1'
 
-  s.add_development_dependency 'rspec', '~> 2.14.1'
+  s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rubocop', '~> 0.4'
   s.add_development_dependency 'webmock', '~> 2.3'
-  s.add_development_dependency 'byebug'
+  s.add_development_dependency 'rake', '~> 10.0'
 end
