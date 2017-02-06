@@ -20,7 +20,7 @@ class Postmen
   setting :endpoint
 
   def self.endpoint
-    config.endpoint || "https://#{self.config.region}-api.postmen.com/v3"
+    config.endpoint || "https://#{config.region}-api.postmen.com/v3"
   end
 
   def self.root

@@ -25,7 +25,7 @@ class Postmen
     def_delegators :@data, :[], :each
 
     def initialize(response)
-      @data = response[:data][self.class.key].map{|element| self.class.model.new(element) }
+      @data = response[:data][self.class.key].map { |element| self.class.model.new(element) }
     end
   end
 end

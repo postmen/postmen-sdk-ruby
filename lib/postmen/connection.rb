@@ -7,30 +7,29 @@ class Postmen
     end
 
     def get(path, options = {})
-      begin
-        Response.new(
-          HTTP
-            .headers(headers)
-            .get(get_full_url(path))
-        ).tap(&:ensure_rate_limit!)
-      rescue RateLimitExceeded
-        if true
-          @requests += 1
-          raise if @requests > MAX_REQUESTS
-          sleep(1)
-          retry
-        end
-      end
+      Response.new(raw_get(path, options)).tap(&:ensure_rate_limit!)
+    rescue RateLimitExceeded
+      @requests += 1
+      raise if @requests > MAX_REQUESTS
+      sleep(@requests**2)
+      retry
     end
 
     private
+
+    def raw_get(path, options)
+      HTTP
+        .headers(headers)
+        .get(get_full_url(path), options)
+    end
+
     def get_full_url(path)
       [Postmen.endpoint, path].join
     end
 
     def headers
       {
-        "content-type": "application/json",
+        "content-type": 'application/json',
         "postmen-api-key": Postmen.config.api_key
       }
     end

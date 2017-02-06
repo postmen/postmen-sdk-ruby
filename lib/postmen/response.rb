@@ -1,7 +1,7 @@
 class Postmen
   class Response < SimpleDelegator
     def ensure_rate_limit!
-      raise RateLimitExceeded.new(self) if rate_limit_exceeded?
+      raise RateLimitExceeded, self if rate_limit_exceeded?
     end
 
     def parsed_response
@@ -13,15 +13,15 @@ class Postmen
     end
 
     def remaining_api_calls
-      Integer(headers["X-RateLimit-Remaining"])
+      Integer(headers['X-RateLimit-Remaining'])
     end
 
     def api_rate_limit
-      Integer(headers["X-RateLimit-Limit"])
+      Integer(headers['X-RateLimit-Limit'])
     end
 
     def api_rate_limit_reset
-      Integer(headers["X-RateLimit-Reset"])
+      Integer(headers['X-RateLimit-Reset'])
     end
 
     def api_rate_limit_reset_at

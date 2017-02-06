@@ -13,7 +13,7 @@ describe Postmen::LabelCollection do
     subject { Postmen::LabelCollection.all }
 
     context 'without labels' do
-      let(:api_key){ "CORRECT_KEY_NO_LABELS" }
+      let(:api_key) { 'CORRECT_KEY_NO_LABELS' }
 
       it 'returns empty array' do
         expect(subject.to_a).to eq([])
@@ -21,16 +21,15 @@ describe Postmen::LabelCollection do
     end
 
     context 'with labels' do
-      let(:api_key){ "CORRECT_KEY" }
-      let(:labels){ JSON.parse(responses('labels', 'success'), symbolize_names: true)[:data][:labels] }
-      let(:first_label){ Postmen::Label.new(labels[0]) }
-      let(:second_label){ Postmen::Label.new(labels[1]) }
+      let(:api_key) { 'CORRECT_KEY' }
+      let(:labels) { JSON.parse(responses('labels', 'success'), symbolize_names: true)[:data][:labels] }
+      let(:first_label) { Postmen::Label.new(labels[0]) }
+      let(:second_label) { Postmen::Label.new(labels[1]) }
 
       it 'wraps labels into collection of Label models' do
         expect(subject[0]).to eq(first_label)
         expect(subject[1]).to eq(second_label)
       end
-
     end
   end
 end

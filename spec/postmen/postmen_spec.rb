@@ -10,7 +10,7 @@ describe Postmen do
   end
 
   describe '#endpoint' do
-    subject{ described_class.endpoint }
+    subject { described_class.endpoint }
 
     before do
       Postmen.configure do |config|
@@ -19,7 +19,7 @@ describe Postmen do
     end
 
     context 'with sandbox region' do
-      let(:region){ 'sandbox' }
+      let(:region) { 'sandbox' }
 
       it 'sets correct endpoint' do
         expect(subject).to eq('https://sandbox-api.postmen.com/v3')
@@ -27,7 +27,7 @@ describe Postmen do
     end
 
     context 'with production region' do
-      let(:region){ 'production' }
+      let(:region) { 'production' }
 
       it 'sets correct endpoint' do
         expect(subject).to eq('https://production-api.postmen.com/v3')
@@ -35,7 +35,7 @@ describe Postmen do
     end
 
     context 'with custom endpoint' do
-      let(:region){ 'production' }
+      let(:region) { 'production' }
 
       before do
         Postmen.configure do |config|

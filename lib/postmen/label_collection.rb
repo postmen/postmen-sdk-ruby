@@ -6,7 +6,7 @@ class Postmen
     key :labels
 
     def self.all
-      new(Connection.new.get("/labels").parsed_response)
+      new(Connection.new.get('/labels').parsed_response)
     end
   end
 end
