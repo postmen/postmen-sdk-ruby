@@ -25,7 +25,7 @@ class Postmen
     end
 
     def formatted_tracking_numbers
-      tracking_numbers.fmap{|numbers| Array(numbers).join(',') }.value
+      tracking_numbers.fmap { |numbers| Array(numbers).join(',') }.value
     end
 
     def query

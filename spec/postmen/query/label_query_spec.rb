@@ -38,7 +38,7 @@ describe Postmen::LabelQuery do
 
   describe 'created_at_min' do
     context 'with DateTime object' do
-      let(:params){ { created_at_min: DateTime.parse('2017-02-02 20:00') } }
+      let(:params) { { created_at_min: DateTime.parse('2017-02-02 20:00') } }
 
       it 'parses it to correct format' do
         expect(subject).to eq(created_at_min: '2017-02-02T20:00:00+00:00')
@@ -48,7 +48,7 @@ describe Postmen::LabelQuery do
 
   describe 'created_at_max' do
     context 'with DateTime object' do
-      let(:params){ { created_at_max: DateTime.parse('2017-02-02 20:00') } }
+      let(:params) { { created_at_max: DateTime.parse('2017-02-02 20:00') } }
 
       it 'parses it to correct format' do
         expect(subject).to eq(created_at_max: '2017-02-02T20:00:00+00:00')
@@ -58,7 +58,7 @@ describe Postmen::LabelQuery do
 
   describe 'tracking_numbers' do
     context 'with array of numbers' do
-      let(:params){ {tracking_numbers: [1,2,3] } }
+      let(:params) { { tracking_numbers: [1, 2, 3] } }
 
       it 'concatenates numbers' do
         expect(subject).to eq(tracking_numbers: '1,2,3')
@@ -66,7 +66,7 @@ describe Postmen::LabelQuery do
     end
 
     context 'with concatenated string' do
-      let(:params){ {tracking_numbers: '1,2,3' } }
+      let(:params) { { tracking_numbers: '1,2,3' } }
       it 'passes them to query' do
         expect(subject).to eq(tracking_numbers: '1,2,3')
       end
