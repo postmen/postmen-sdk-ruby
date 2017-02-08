@@ -6,8 +6,12 @@ class Postmen
     attribute :files, Types::Array.member(Types::Hash)
     attribute :rate, Types::Hash
 
-    def self.all
-      LabelCollection.all
+    def self.all(options = {})
+      LabelCollection.all(options)
+    end
+
+    def self.find(id)
+      LabelCollection.find(id)
     end
   end
 end

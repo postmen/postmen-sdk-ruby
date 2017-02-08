@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'http', '= 2.0'
   s.add_dependency 'dry-configurable', '~> 0.5'
   s.add_dependency 'dry-struct', '~> 0.1'
+  s.add_dependency 'dry-monads', '~> 0.2'
 
   s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rubocop', '~> 0.4'

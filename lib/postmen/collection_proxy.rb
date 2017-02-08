@@ -27,5 +27,9 @@ class Postmen
     def initialize(response)
       @data = response[:data][self.class.key].map { |element| self.class.model.new(element) }
     end
+
+    def self.get(response)
+      self.class.model.new(response[:data])
+    end
   end
 end

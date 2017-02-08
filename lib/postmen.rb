@@ -6,6 +6,13 @@ require 'pathname'
 require 'forwardable'
 
 require 'postmen/version'
+require 'postmen/types'
+require 'postmen/connection'
+require 'postmen/collection_proxy'
+require 'postmen/label'
+require 'postmen/label_collection'
+require 'postmen/response'
+require 'postmen/query/label_query'
 
 class Postmen
   extend Dry::Configurable
@@ -27,10 +34,3 @@ class Postmen
     Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '../')))
   end
 end
-
-require 'postmen/types'
-require 'postmen/connection'
-require 'postmen/collection_proxy'
-require 'postmen/label'
-require 'postmen/label_collection'
-require 'postmen/response'
