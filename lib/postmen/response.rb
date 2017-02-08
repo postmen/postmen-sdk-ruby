@@ -1,7 +1,12 @@
 class Postmen
   class Response < SimpleDelegator
-    def ensure_rate_limit!
-      raise RateLimitExceeded, self if rate_limit_exceeded?
+    def parse_response!
+      ensure_rate_limit!
+      ensure_resource_found!
+    end
+
+    def meta
+      @meta ||= parsed_response[:meta]
     end
 
     def parsed_response
@@ -26,6 +31,16 @@ class Postmen
 
     def api_rate_limit_reset_at
       Time.at(api_rate_limit_reset)
+    end
+
+    private
+
+    def ensure_rate_limit!
+      raise RateLimitExceeded, self if rate_limit_exceeded?
+    end
+
+    def ensure_resource_found!
+      raise ResourceNotFound, self if meta[:code] == 4153
     end
   end
 end

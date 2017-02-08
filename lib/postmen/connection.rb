@@ -7,7 +7,7 @@ class Postmen
     end
 
     def get(path, options = {})
-      Response.new(raw_get(path, options)).tap(&:ensure_rate_limit!)
+      Response.new(raw_get(path, options)).tap(&:parse_response!)
     rescue RateLimitExceeded
       @requests += 1
       raise if @requests > MAX_REQUESTS

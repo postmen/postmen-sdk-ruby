@@ -15,6 +15,10 @@ class Postmen
         return settings[:key] unless key
         settings[:key] = key
       end
+
+      def get(response)
+        model.new(response[:data])
+      end
     end
 
     def self.included(base)
@@ -26,10 +30,6 @@ class Postmen
 
     def initialize(response)
       @data = response[:data][self.class.key].map { |element| self.class.model.new(element) }
-    end
-
-    def self.get(response)
-      self.class.model.new(response[:data])
     end
   end
 end
