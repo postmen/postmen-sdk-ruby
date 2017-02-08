@@ -23,7 +23,7 @@ class Postmen
   RequestError = Class.new(Error)
   ResourceNotFound = Class.new(RequestError)
 
-  setting :api_key, '77cb5493-a20a-45e4-9112-090b43337f97'
+  setting :api_key
   setting :region, 'sandbox'
   setting :endpoint
 

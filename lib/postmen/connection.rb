@@ -11,7 +11,7 @@ class Postmen
     rescue RateLimitExceeded
       @requests += 1
       raise if @requests > MAX_REQUESTS
-      sleep(@requests**2)
+      sleep(60)
       retry
     end
 
