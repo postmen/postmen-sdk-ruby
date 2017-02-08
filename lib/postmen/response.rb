@@ -10,7 +10,7 @@ class Postmen
     end
 
     def parsed_response
-      JSON.parse(body, symbolize_names: true)
+      @parsed_response ||= JSON.parse(body, symbolize_names: true)
     end
 
     def rate_limit_exceeded?
