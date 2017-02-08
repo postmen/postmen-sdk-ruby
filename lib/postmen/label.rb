@@ -1,6 +1,6 @@
 class Postmen
   class Label < Dry::Struct
-    attribute :id, Types::String # TODO: implement UUID type
+    attribute :id, Types::UUID
     attribute :status, Types::String
     attribute :tracking_numbers, Types::Array.member(Types::String)
     attribute :files, Types::Array.member(Types::Hash)
