@@ -5,6 +5,11 @@ require 'webmock/rspec'
 Bundler.setup
 
 RSpec.configure do |config|
+  config.before(:suite) do
+    Postmen.configure do |config|
+      config.region = 'sandbox'
+    end
+  end
 end
 
 def responses(key, type)
