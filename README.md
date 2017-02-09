@@ -9,11 +9,10 @@ Ruby Gem for Postmen API.
 
 This extension helps developers to integrate with Postmen easily.
 
-## About Postmen
+## Early development stage
 
+This gem is on early stage of development - There are a lot of features that are not covered yet, you may also expect heavy changes in the public API, before we hit version `1.0.0` (see the Milestones section)
 
-
-### Changes
 
 
 ## Installation
@@ -32,9 +31,37 @@ This extension helps developers to integrate with Postmen easily.
 
 ## Configuration
 
+```ruby
+
+Postmen.configure do |config|
+  config.region = 'sandbox' # set 'sandbox' or 'production. Required
+  config.api_key = 'YOUR API KEY' # Required
+  config.endpoint = 'http://my-custom-endpoint.example.com' # Optionally set custom endpoint url.
+end
+
+```
 
 ## Usage
 
+```ruby
+require 'postmen'
+
+# Configure postmen first, see Configuration section
+
+### Fetch all labels:
+
+Postmen::Label.all # Returns an instance of Postmen::LabelCollection
+
+# optionally you can pass additional params to the query:
+
+Postmen::Label.all(shipper_account_id: '1111')
+Postmen::Label.all(status: 'created')
+# For more options, please see the documentation: https://docs.postmen.com/api.html#labels-list-all-labels
+
+### Fetch single label
+
+Postmen::Label.find('1111') # Returns an instance of Postmen::Label
+```
 
 ## The License (MIT)
 
