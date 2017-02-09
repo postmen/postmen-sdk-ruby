@@ -24,7 +24,7 @@ class Postmen
   ResourceNotFound = Class.new(RequestError)
 
   setting :api_key
-  setting :region, 'sandbox'
+  setting :region
   setting :endpoint
 
   def self.endpoint
