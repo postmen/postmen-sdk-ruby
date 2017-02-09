@@ -63,6 +63,30 @@ Postmen::Label.all(status: 'created')
 Postmen::Label.find('1111') # Returns an instance of Postmen::Label
 ```
 
+### Label
+
+An instance of `Postmen::Label` responds to following methods:
+
+`id`,
+`status`,
+`tracking_numbers`
+`files`,
+`rate`
+
+### LabelCollection
+
+`Postmen::LabelCollection` acts as an Array of `Label` instances. You can do things like:
+
+```ruby
+collection = Postmen::Label.all 
+
+collection.first # Returns an instance of Label
+collection.size # Returns number of elements returned
+collection.each{|label| puts label.inspect } # Iterates over labels
+collection.select{|label|  } # Selects labels by given criteria
+```
+and so on.
+
 ## The License (MIT)
 
 Released under the MIT license. See the LICENSE file for the complete wording.
