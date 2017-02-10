@@ -12,5 +12,9 @@ class Postmen
     def self.find(id)
       get(Connection.new.get("/labels/#{id}").parsed_response)
     end
+
+    def self.create(params)
+      Label.new(Connection.new.post('/labels', CreateLabelQuery.new(params).to_query).parsed_response[:data])
+    end
   end
 end

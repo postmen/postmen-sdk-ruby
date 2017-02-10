@@ -13,6 +13,7 @@ require 'postmen/label'
 require 'postmen/label_collection'
 require 'postmen/response'
 require 'postmen/query/label_query'
+require 'postmen/query/create_label_query'
 
 class Postmen
   extend Dry::Configurable

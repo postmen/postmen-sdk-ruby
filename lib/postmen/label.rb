@@ -13,5 +13,9 @@ class Postmen
     def self.find(id)
       LabelCollection.find(id)
     end
+
+    def self.create(params)
+      LabelCollection.create(params)
+    end
   end
 end

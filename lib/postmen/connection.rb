@@ -15,12 +15,22 @@ class Postmen
       retry
     end
 
+    def post(path, options = {})
+      Response.new(raw_post(path,options))
+    end
+
     private
 
     def raw_get(path, options)
       HTTP
         .headers(headers)
         .get(get_full_url(path), options)
+    end
+
+    def raw_post(path, options)
+      HTTP
+       .headers(headers)
+       .post(get_full_url(path), options)
     end
 
     def get_full_url(path)
