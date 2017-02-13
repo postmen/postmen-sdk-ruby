@@ -6,8 +6,8 @@ Bundler.setup
 
 RSpec.configure do |config|
   config.before(:suite) do
-    Postmen.configure do |config|
-      config.region = 'sandbox'
+    Postmen.configure do |c|
+      c.region = 'sandbox'
     end
   end
 end
@@ -41,4 +41,11 @@ def stub_label_request!
   stub_request(:get, 'https://sandbox-api.postmen.com/v3/labels/ee1af83b-6aa9-40ad-b60f-3b7a17cf78ce')
     .to_return(body: responses('labels', 'single_existing'),
                headers: { 'Content-Type' => 'application/json; charset=utf-8' })
+end
+
+def stub_label_creation_request!
+  stub_request(:post, 'https://sandbox-api.postmen.com/v3/labels')
+    .to_return(body: responses('labels', 'single_existing'),
+               headers: { 'Content-Type' => 'application/json; charset=utf-8' })
+
 end

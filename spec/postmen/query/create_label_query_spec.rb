@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Postmen::CreateLabelQuery do
-  subject { Postmen::CreateLabelQuery.new(params).to_query[:params] }
+  subject { Postmen::CreateLabelQuery.new(params).to_query[:json] }
   let(:service_type) { 'ups' }
   let(:shipper_account) { { id: 'ea892cab-2f2b-4c1f-9294-95fd8a912662' } }
   let(:shipment) { {} }
