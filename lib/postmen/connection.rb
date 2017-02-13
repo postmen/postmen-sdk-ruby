@@ -16,7 +16,7 @@ class Postmen
     end
 
     def post(path, options = {})
-      Response.new(raw_post(path,options))
+      Response.new(raw_post(path, options))
     end
 
     private
@@ -29,8 +29,8 @@ class Postmen
 
     def raw_post(path, options)
       HTTP
-       .headers(headers)
-       .post(get_full_url(path), options)
+        .headers(headers)
+        .post(get_full_url(path), options)
     end
 
     def get_full_url(path)
