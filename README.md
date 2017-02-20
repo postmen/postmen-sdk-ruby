@@ -20,7 +20,7 @@ This gem is on early stage of development - There are a lot of features that are
 1. Add the following line to your application's Gemfile
 
     ```
-    gem "postmen", "~> 0.0.1"
+    gem "postmen", "~> 0.1.0"
     ```
 
 2. Run bundler
