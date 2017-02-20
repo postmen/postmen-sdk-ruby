@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files         = Dir['{bin,lib}/**/*', 'README.md']
   s.require_paths = ['lib']
 
-  s.add_dependency 'http', '= 2.0'
+  s.add_dependency 'http', '~> 2.2.1'
   s.add_dependency 'dry-configurable', '~> 0.5'
   s.add_dependency 'dry-struct', '~> 0.1'
   s.add_dependency 'dry-monads', '~> 0.2'
