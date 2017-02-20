@@ -1,10 +1,8 @@
 require 'spec_helper'
 
-describe Postmen::CreateLabelQuery do
-  subject { Postmen::CreateLabelQuery.new(params).to_query[:json] }
-  let(:service_type) { 'ups' }
-  let(:shipper_account) { { id: 'ea892cab-2f2b-4c1f-9294-95fd8a912662' } }
-  let(:shipment) do
+describe Postmen::Shipment do
+  subject { Postmen::Shipment.new(params) }
+  let(:params) do
     {
       'ship_from': {
         'contact_name': 'Nottingham Inc.',
@@ -65,40 +63,18 @@ describe Postmen::CreateLabelQuery do
       ]
     }
   end
-  let(:default_params) { { service_type: service_type, shipper_account: shipper_account, shipment: shipment } }
 
-  context 'without required params' do
-    context 'without service_type' do
-      let(:params) { default_params.tap { |h| h.delete(:service_type) } }
-
-      it 'raises TypeError' do
-        expect { subject }.to raise_error(Dry::Struct::Error)
-      end
+  context 'with correct params' do
+    it 'sets correct ship_from address' do
+      expect(subject.to_hash[:ship_from]).to eq(params[:ship_from])
     end
 
-    context 'without shipper_account' do
-      let(:params) { default_params.tap { |h| h.delete(:shipper_account) } }
-
-      it 'raises TypeError' do
-        expect { subject }.to raise_error(Dry::Struct::Error)
-      end
+    it 'sets correct ship_to address' do
+      expect(subject.to_hash[:ship_to]).to eq(params[:ship_to])
     end
 
-    context 'without shipment' do
-      let(:params) { default_params.tap { |h| h.delete(:shipment) } }
-
-      it 'raises TypeError' do
-        expect { subject }.to raise_error(Dry::Struct::Error)
-      end
-    end
-  end
-
-  context 'with valid params' do
-    context 'without optional params' do
-      let(:params) { default_params }
-      it 'passes default params to th query' do
-        expect(subject).to eq(default_params)
-      end
+    it 'sets correct items' do
+      expect(subject.to_hash[:items]).to eq(params[:items])
     end
   end
 end

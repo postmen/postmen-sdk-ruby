@@ -47,5 +47,4 @@ def stub_label_creation_request!
   stub_request(:post, 'https://sandbox-api.postmen.com/v3/labels')
     .to_return(body: responses('labels', 'single_existing'),
                headers: { 'Content-Type' => 'application/json; charset=utf-8' })
-
 end

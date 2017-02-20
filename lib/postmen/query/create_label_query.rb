@@ -4,7 +4,7 @@ class Postmen
 
     attribute :service_type, Types::String
     attribute :shipper_account, Types::Reference
-    attribute :shipment, Types::Shipment
+    attribute :shipment, Shipment
     attribute :async, Types::Bool.optional.default(nil)
     attribute :return_shipment, Types::Bool.optional.default(nil)
     attribute :paper_size, Types::PaperSize.optional.default(nil)
