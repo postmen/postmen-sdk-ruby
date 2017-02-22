@@ -4,6 +4,8 @@
 [![Code Climate](https://codeclimate.com/github/postmen/postmen-sdk-ruby/badges/gpa.svg)](https://codeclimate.com/github/postmen/postmen-sdk-ruby)
 [![Gem Version](https://badge.fury.io/rb/postmen.svg)](https://badge.fury.io/rb/postmen)
 [![Dependency Status](https://gemnasium.com/badges/github.com/postmen/postmen-sdk-ruby.svg)](https://gemnasium.com/github.com/postmen/postmen-sdk-ruby)
+[![Coverage Status](https://coveralls.io/repos/github/postmen/postmen-sdk-ruby/badge.svg?branch=master)](https://coveralls.io/github/postmen/postmen-sdk-ruby?branch=master)
+
 
 Ruby Gem for Postmen API.
 
