@@ -1,4 +1,7 @@
 class Postmen
+  # Address object
+  #
+  # @note see https://docs.postmen.com/api.html#address
   class Address < Dry::Struct
     constructor_type :strict_with_defaults
 
@@ -17,6 +20,8 @@ class Postmen
     attribute :type, Types::AddressType.optional.default(nil)
     attribute :tax_id, Types::String.optional.default(nil)
 
+    # Converts object to hash
+    # @return [Hash]
     def to_hash
       super.reject { |_k, v| v.nil? }
     end

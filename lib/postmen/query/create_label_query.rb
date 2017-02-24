@@ -1,4 +1,7 @@
 class Postmen
+  # This class holds all the logic behind preparing query for
+  # creating a Label. It does type convertion, removes empty values and so on.
+  # @see LabelCollection#create Usage
   class CreateLabelQuery < Dry::Struct
     constructor_type :strict_with_defaults
 
@@ -15,6 +18,8 @@ class Postmen
     attribute :billing, Types::Billing.optional.default(nil)
     attribute :customs, Types::Customs.optional.default(nil)
 
+    # Converts query object to hash
+    # @return [Hash]
     def to_query
       {
         json: query

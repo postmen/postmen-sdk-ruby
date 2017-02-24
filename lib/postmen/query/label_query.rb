@@ -1,5 +1,9 @@
 class Postmen
+  # This class holds all the logic behind querying for a single Label.
+  # @see LabelCollection.find Usage
   class LabelQuery < Dry::Struct
+    # Expected format for dates
+    # example value: 2017-02-08T10:17:04+01:00
     DATE_FORMAT = '%FT%T%:z'.freeze
 
     constructor_type :schema
@@ -12,6 +16,8 @@ class Postmen
     attribute :tracking_numbers, Types::String.maybe
     attribute :next_token, Types::String.optional
 
+    # Converts query object to hash
+    # @return [Hash]
     def to_query
       {
         params: query

@@ -1,11 +1,21 @@
 class Postmen
+  # Connection class is used to perform any HTTP connections,
+  # it also does error handling.
   class Connection
+    # Maximum number of retries
     MAX_REQUESTS = 5
 
     def initialize
       @requests = 0
     end
 
+    # Performs a HTTP GET request.
+    #
+    # @param path [String]
+    # @param options [Hash]
+    # @example
+    #   .get('/labels')
+    #   .get('/labels', { params: { limit: 5 } })
     def get(path, options = {})
       Response.new(raw_get(path, options)).tap(&:parse_response!)
     rescue RateLimitExceeded
@@ -15,6 +25,13 @@ class Postmen
       retry
     end
 
+    # Performs a HTTP POST request.
+    #
+    # @param path [String]
+    # @param options [Hash]
+    # @example
+    #   .post('/labels')
+    #   .post('/labels', { json: { my: { sample: :data } } })
     def post(path, options = {})
       Response.new(raw_post(path, options))
     end
