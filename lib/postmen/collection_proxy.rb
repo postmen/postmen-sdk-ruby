@@ -8,6 +8,7 @@ class Postmen
 
     # This module holds all class-level methods
     module ClassMethods
+      # Settings hash. Used in model/key methods.
       attr_reader :settings
 
       # Sets (if argument is provided) or gets the model class name
@@ -29,12 +30,17 @@ class Postmen
       end
 
       # Wraps raw JSON response into an model
+      #
+      # @param response [Hash] parsed JSON response
+      # @return model an instance of
       def get(response)
         model.new(response[:data])
       end
     end
 
-    # :nodoc:
+    # Method called on base object when mixin gets included
+    #
+    # @private
     def self.included(base)
       base.extend ClassMethods
       base.instance_variable_set('@settings', {})

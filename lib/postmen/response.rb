@@ -51,10 +51,14 @@ class Postmen
 
     private
 
+    # Guard method, checking if rate limit was not exceeded
+    # @api private
     def ensure_rate_limit!
       raise RateLimitExceeded, self if rate_limit_exceeded?
     end
 
+    # Guard method, checking if resource was found.
+    # @api private
     def ensure_resource_found!
       raise ResourceNotFound, self if meta[:code] == 4153
     end
