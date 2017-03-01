@@ -1,4 +1,6 @@
 doc/*
+coverage/*
+.byebug_history
 *.gem
 .yardoc
 Gemfile.lock
