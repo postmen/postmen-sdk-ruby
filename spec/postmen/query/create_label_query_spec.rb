@@ -96,7 +96,7 @@ describe Postmen::CreateLabelQuery do
   context 'with valid params' do
     context 'without optional params' do
       let(:params) { default_params }
-      it 'passes default params to th query' do
+      it 'passes default params to the query' do
         expect(subject).to eq(default_params)
       end
     end

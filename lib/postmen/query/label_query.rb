@@ -9,7 +9,7 @@ class Postmen
     constructor_type :schema
 
     attribute :shipper_account_id, Types::String.optional
-    attribute :status, Types::Strict::Nil | Types::Statuses
+    attribute :status, Types::Strict::Nil | Types::LabelStatuses
     attribute :limit, Types::String.optional
     attribute :created_at_min, Types::DateTime.maybe
     attribute :created_at_max, Types::DateTime.maybe
