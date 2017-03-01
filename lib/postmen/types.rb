@@ -6,25 +6,15 @@ class Postmen
   module Types
     include Dry::Types.module
 
-    # Passport object
-    #
-    # @see https://docs.postmen.com/api.html#passport API Documentation
-    Passport = Types::Hash
-
-    # Address object
-    #
-    # @see https://docs.postmen.com/api.html#address API Documentation
-    Address = Types::Hash
-
-    # UUID Type
-    #
-    # @see https://en.wikipedia.org/wiki/Universally_unique_identifier Definition
-    UUID = Types::Strict::String.constrained(
-      format: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    # Possible statuses for Rates.
+    RateStatuses = Types::String.enum(
+      'calculating',
+      'calculated',
+      'failed'
     )
 
-    # Possible statuses for labels.
-    Statuses = Types::String.enum(
+    # Possible statuses for Labels.
+    LabelStatuses = Types::String.enum(
       'creating',
       'created',
       'cancelling',
@@ -43,10 +33,6 @@ class Postmen
 
     # Name of the country
     Country = Types::String
-
-    # Shipment object reference
-    # @see https://docs.postmen.com/api.html#reference API Documentation
-    Reference = Types::Hash.schema(id: Types::UUID)
 
     # Paper size
     PaperSize = Types::String.enum(
@@ -80,18 +66,6 @@ class Postmen
       'third_party'
     )
 
-    # Payment method.
-    #
-    # @see https://docs.postmen.com/api.html#payment-method---account API Documentation
-    PaymentMethod = Types::Hash.schema(type: Types::String,
-                                       account_number: Types::String,
-                                       postal_code: Types::String,
-                                       country: Country)
-    # Customs billing
-    #
-    # @see https://docs.postmen.com/api.html#customs-billing API Documentation
-    CustomsBilling = Types::Hash.schema(paid_by: Types::PaidBy,
-                                        method: Types::PaymentMethod)
     # Terms of trade - used in customs object
     #
     # @see Customs
@@ -103,16 +77,6 @@ class Postmen
       'dap'
     )
 
-    # Invoice object
-    #
-    # @see https://docs.postmen.com/api.html#a-invoice-file-object
-    Invoice = Types::Hash
-
-    # Billing object
-    #
-    # @see https://docs.postmen.com/api.html#billing API Documentation
-    Billing = Types::Hash
-
     # FTR Exemption - used in NoEEI object
     # @see NoEEI
     # @see https://docs.postmen.com/api.html#no_eei API Documentation
@@ -122,31 +86,6 @@ class Postmen
       'noeei_30_36'
     )
 
-    # EEI type - AES - used in Customs object
-    # @see Customs
-    # @see https://docs.postmen.com/api.html#aes API Documentation
-    AES = Types::Hash.schema(type: Types::String,
-                             itn_number: Types::String)
-
-    # EEI type - no_eei - used in Customs object
-    # @see Customs
-    # @see https://docs.postmen.com/api.html#no_eei API Documentation
-    NoEEI = Types::Hash.schema(type: Types::String,
-                               ftr_exemption: Types::FtrExemption)
-
-    # Customs object
-    # @see https://docs.postmen.com/api.html#customs API Documentation
-    Customs = Types::Hash.schema(purpose: Types::CustomsPurpose,
-                                 terms_of_trade: Types::TermsOfTrade,
-                                 eei: Types::AES | Types::NoEEI,
-                                 billing: Types::CustomsBilling,
-                                 importer_address: Address,
-                                 passport: Passport)
-
-    # Money object
-    # @see https://docs.postmen.com/api.html#money API Documentation
-    Money = Types::Hash.schema(amount: Types::Float,
-                               currency: Types::String)
     # Unit of weight - used in Weight object
     # @see Weight
     WeightUnit = Types::String.enum(
@@ -166,27 +105,22 @@ class Postmen
       'ft',
       'yd'
     )
-
-    # Weight
-    # @see https://docs.postmen.com/api.html#weight API Documentation
-    Weight = Types::Hash.schema(unit: Types::WeightUnit, value: Types::Float)
-
-    # Dimension
-    # @see https://docs.postmen.com/api.html#dimension API Documentation
-    Dimension = Types::Hash.schema(width: Types::Float,
-                                   height: Types::Float,
-                                   depth: Types::Float,
-                                   unit: Types::DimensionUnit)
-
-    # Item - element of shippment
-    # @see https://docs.postmen.com/api.html#item API Documentation
-    Item = Types::Hash.schema(description: Types::String,
-                              quantity: Types::Int,
-                              price: Types::Money,
-                              weight: Types::Weight,
-                              item_id: Types::String,
-                              origin_country: Types::Country,
-                              sku: Types::String,
-                              hs_code: Types::String)
   end
 end
+require_relative 'types/address'
+require_relative 'types/invoice'
+require_relative 'types/weight'
+require_relative 'types/passport'
+require_relative 'types/uuid'
+require_relative 'types/reference'
+require_relative 'types/payment_method'
+require_relative 'types/shipper_account'
+require_relative 'types/dimension'
+require_relative 'types/billing'
+require_relative 'types/money'
+require_relative 'types/item'
+require_relative 'types/customs_billing'
+require_relative 'types/aes'
+require_relative 'types/no_eei'
+require_relative 'types/customs'
+require_relative 'types/detailed_charges'
