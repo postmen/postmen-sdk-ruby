@@ -3,7 +3,7 @@ class Postmen
   #
   # @see https://docs.postmen.com/api.html#rates API documentation
   class RateObject < Dry::Struct
-    attribute :shipper_account, Types::ShipperAccount
+    attribute :shipper_account, Types::BriefShipperAccount
     attribute :service_type, Types::String
     attribute :service_name, Types::String
     attribute :charge_weight, Types::Weight

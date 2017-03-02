@@ -1,4 +1,3 @@
-require 'byebug'
 class Postmen
   # This class wraps the array of Rate models
   class RateCollection
