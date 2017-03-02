@@ -50,3 +50,25 @@ def stub_label_creation_request!
     .to_return(body: responses('labels', 'single_existing'),
                headers: { 'Content-Type' => 'application/json; charset=utf-8' })
 end
+
+def stub_rates_request!
+  stub_request(:get, 'https://sandbox-api.postmen.com/v3/rates')
+    .with(headers: { "postmen-api-key": 'CORRECT_KEY' })
+    .to_return(body: responses('rates', 'success'),
+               headers: { 'Content-Type' => 'application/json; charset=utf-8' })
+
+  stub_request(:get, 'https://sandbox-api.postmen.com/v3/rates')
+    .with(headers: { "postmen-api-key": 'CORRECT_KEY_NO_RATES' })
+    .to_return(body: responses('rates', 'empty'),
+               headers: { 'Content-Type' => 'application/json; charset=utf-8' })
+end
+
+def stub_rate_request!
+  stub_request(:get, 'https://sandbox-api.postmen.com/v3/rates/00000000-0000-0000-0000-000000000000')
+    .to_return(body: responses('rates', 'single_error'),
+               headers: { 'Content-Type' => 'application/json; charset=utf-8' })
+
+  stub_request(:get, 'https://sandbox-api.postmen.com/v3/rates/ee1af83b-6aa9-40ad-b60f-3b7a17cf78ce')
+    .to_return(body: responses('rates', 'single_existing'),
+               headers: { 'Content-Type' => 'application/json; charset=utf-8' })
+end

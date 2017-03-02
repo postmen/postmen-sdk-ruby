@@ -17,7 +17,11 @@ require 'postmen/label_collection'
 require 'postmen/response'
 require 'postmen/query/label_query'
 require 'postmen/query/create_label_query'
-
+require 'postmen/query/rate_query'
+require 'postmen/query/create_rate_query'
+require 'postmen/rate_object'
+require 'postmen/rate'
+require 'postmen/rate_collection'
 # This is the main class, it's being used as a namespace for all
 # related classes and modules as well.
 class Postmen
