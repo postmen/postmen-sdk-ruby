@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Postmen::Address do
-  subject { Postmen::Address.new(params) }
+describe Postmen::Types::Address do
+  subject { Postmen::Types::Address.new(params) }
 
   context 'with correct attributes' do
     context 'with country only' do
