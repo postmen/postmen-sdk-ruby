@@ -28,6 +28,10 @@ require 'postmen/query/shipper_account_update_query'
 require 'postmen/query/shipper_account_update_credentials_query'
 require 'postmen/shipper_account'
 require 'postmen/shipper_account_collection'
+require 'postmen/query/manifest_query'
+require 'postmen/query/create_manifest_query'
+require 'postmen/manifest'
+require 'postmen/manifest_collection'
 # This is the main class, it's being used as a namespace for all
 # related classes and modules as well.
 class Postmen

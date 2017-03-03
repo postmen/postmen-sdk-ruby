@@ -24,6 +24,13 @@ class Postmen
       'failed'
     )
 
+    # Possible statuses for Manifest
+    ManifestStatuses = Types::String.enum(
+      'manifesting',
+      'manifested',
+      'failed'
+    )
+
     # Type of the address
     # @see Address
     AddressType = Types::String.enum(
