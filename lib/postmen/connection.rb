@@ -1,4 +1,3 @@
-require 'byebug'
 class Postmen
   # Connection class is used to perform any HTTP connections,
   # it also does error handling.
