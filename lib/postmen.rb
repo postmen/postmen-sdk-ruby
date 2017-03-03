@@ -21,6 +21,13 @@ require 'postmen/query/create_rate_query'
 require 'postmen/rate_object'
 require 'postmen/rate'
 require 'postmen/rate_collection'
+require 'postmen/query/shipper_account_query'
+require 'postmen/query/create_shipper_account_query'
+require 'postmen/query/shipper_account_query'
+require 'postmen/query/shipper_account_update_query'
+require 'postmen/query/shipper_account_update_credentials_query'
+require 'postmen/shipper_account'
+require 'postmen/shipper_account_collection'
 # This is the main class, it's being used as a namespace for all
 # related classes and modules as well.
 class Postmen

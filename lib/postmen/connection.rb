@@ -1,3 +1,4 @@
+require 'byebug'
 class Postmen
   # Connection class is used to perform any HTTP connections,
   # it also does error handling.
@@ -36,6 +37,20 @@ class Postmen
       Response.new(raw_post(path, options))
     end
 
+    def put(path, options = {})
+      Response.new(raw_put(path, options))
+    end
+    # Performs a HTTP DELETE request
+    #
+    # @param path [String]
+    # @example
+    #   .delete('/shipper-accounts/11111')
+    def delete(path)
+      HTTP
+        .headers(headers)
+        .delete(get_full_url(path))
+    end
+
     private
 
     def raw_get(path, options)
@@ -48,6 +63,13 @@ class Postmen
       HTTP
         .headers(headers)
         .post(get_full_url(path), options)
+    end
+
+    def raw_put(path, options)
+      debugger
+      HTTP
+        .headers(headers)
+        .put(get_full_url(path), options)
     end
 
     def get_full_url(path)

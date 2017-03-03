@@ -31,6 +31,15 @@ class Postmen
       'residential'
     )
 
+    # List of possible Shipper Account Types
+    ShipperAccountTypes = Types::String.enum(
+      'user',
+      'user_prepaid'
+    )
+
+    # Timezone (use IANA name)
+    Timezone = Types::String
+
     # Name of the country
     Country = Types::String
 
