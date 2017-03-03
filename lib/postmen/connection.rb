@@ -36,6 +36,13 @@ class Postmen
       Response.new(raw_post(path, options))
     end
 
+    # Performs a HTTP PUT request.
+    #
+    # @param path [String]
+    # @param options [Hash]
+    # @example
+    #   .put('/shipper-accounts/123/info')
+    #   ..put('/shipper-accounts/123/info', { json: { my: { sample: :data } } })
     def put(path, options = {})
       Response.new(raw_put(path, options))
     end
