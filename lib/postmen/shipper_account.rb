@@ -46,6 +46,7 @@ class Postmen
     # Update a ShipperAccount credentials
     #
     # @see https://docs.postmen.com/api.html#shipper-accounts-update-a-shipper-account-credentials
+    # @return [ShipperAccount] Updated ShipperAccount resource
     def update_credentials(params = {})
       Connection.new.put(
         "/shipper-accounts/#{@id}/credentials",
@@ -56,8 +57,12 @@ class Postmen
     # Update a shipper account information
     #
     # @see https://docs.postmen.com/api.html#shipper-accounts-update-a-shipper-account-information API Documentation
+    # @example
+    #   .update(description: "Your new description")
+    #   .update(address: {})
+    # @return [ShipperAccount] Updated ShipperAccount resource
     def update(params = {})
-      Connection.new.put("/shipper-accounts/#{@id}/info", ShipperAccountUpdateQuery.new(params).to_query)
+      Connection.new.put("/shipper-accounts/#{@id}/info", ShipperAccountUpdateQuery.new(params.merge(subject: self)).to_query)
     end
   end
 end

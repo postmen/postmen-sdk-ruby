@@ -72,7 +72,6 @@ class Postmen
     end
 
     def raw_put(path, options)
-      debugger
       HTTP
         .headers(headers)
         .put(get_full_url(path), options)

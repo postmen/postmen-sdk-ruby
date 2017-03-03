@@ -4,6 +4,7 @@ class Postmen
   class ShipperAccountUpdateQuery < Dry::Struct
     constructor_type :schema
 
+    attribute :subject, ShipperAccount
     attribute :description, Types::String
     attribute :timezone, Types::Timezone
     attribute :address, Types::Address
@@ -20,9 +21,9 @@ class Postmen
 
     def query
       {
-        description: description,
-        timezone: timezone,
-        address: address
+        description: description || subject.description,
+        timezone: timezone || subject.timezone,
+        address: (address || subject.address).to_h
       }.reject { |_k, v| v.nil? }
     end
   end
