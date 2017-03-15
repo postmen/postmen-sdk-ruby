@@ -57,11 +57,14 @@ class Postmen
   # @#!attribute endpoint [String] Endoint name - specify if you'd like to use custom endpoint
   setting :endpoint
 
+  # @#!attribute failover [Bool] Indicates if the SDK is using failover domain.
+  setting :failover, false
+
   # Returns the endpoint used in all queries
   #
   # @return [String] endpoint url
   def self.endpoint
-    config.endpoint || "https://#{config.region}-api.postmen.com/v3"
+    config.endpoint || Connection.endpoint("#{config.region}-api", config.failover)
   end
 
   # Returns path where gem is installed
@@ -69,5 +72,15 @@ class Postmen
   # @return [Pathname] path
   def self.root
     Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '../')))
+  end
+
+  # Checks wheter we're in failover mode
+  def self.failover?
+    !!config.failover
+  end
+
+  # Switch to failover domain
+  def self.failover!
+    config.failover = true
   end
 end

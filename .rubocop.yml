@@ -9,5 +9,5 @@ Metrics/ModuleLength:
 Metrics/BlockLength:
   Exclude:
     - "**/*_spec.rb"
-Documentation:
+Style/DoubleNegation:
   Enabled: false

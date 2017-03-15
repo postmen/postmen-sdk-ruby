@@ -5,6 +5,7 @@ describe Postmen do
     Postmen.configure do |config|
       config.api_key = ''
       config.endpoint = nil
+      config.failover = false
       config.region = 'sandbox'
     end
   end
@@ -45,6 +46,18 @@ describe Postmen do
 
       it 'overwrites default endpoint uri' do
         expect(subject).to eq('https://my-fancy-endpoint.com')
+      end
+    end
+
+    context 'on failover' do
+      let(:region) { 'sandbox' }
+
+      before do
+        Postmen.failover!
+      end
+
+      it 'sets failover URL' do
+        expect(subject).to eq('https://sandbox-api.postmen.net/v3')
       end
     end
   end
