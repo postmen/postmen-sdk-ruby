@@ -33,7 +33,12 @@ class Postmen
     # @see https://docs.postmen.com/api.html#shipper-accounts-create-a-shipper-account API documentation
     # @return [ShipperAccount]
     def self.create(params)
-      ShipperAccount.new(Connection.new.post('/shipper-accounts', CreateShipperAccountQuery.new(params).to_query).parsed_response[:data])
+      ShipperAccount.new(
+        Connection.new.post(
+          '/shipper-accounts',
+          CreateShipperAccountQuery.new(params).to_query
+        ).parsed_response[:data]
+      )
     end
   end
 end

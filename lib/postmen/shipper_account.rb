@@ -62,7 +62,10 @@ class Postmen
     #   .update(address: {})
     # @return [ShipperAccount] Updated ShipperAccount resource
     def update(params = {})
-      Connection.new.put("/shipper-accounts/#{@id}/info", ShipperAccountUpdateQuery.new(params.merge(subject: self)).to_query)
+      Connection.new.put(
+        "/shipper-accounts/#{@id}/info",
+        ShipperAccountUpdateQuery.new(params.merge(subject: self)).to_query
+      )
     end
   end
 end
