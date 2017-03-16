@@ -33,10 +33,33 @@ class Postmen
       # Switch to failover domain & retry the request
       Postmen.failover!
       retry
+    # Handle Rate limits.
+    # Rate limits are being reset every 60 seconds - we're retrying
+    # given request after that.
+    # @see https://docs.postmen.com/ratelimit.html Documentation
     rescue RateLimitExceeded
       @requests += 1
       raise if @requests > MAX_REQUESTS
       sleep(60)
+      retry
+    # If the resource was not found, simply re-raise the exception
+    rescue ResourceNotFound
+      raise
+    # Handle request errors.
+    # Our current error handling policy depends on the error type.
+    # If the API returns information, that the request is retriable,
+    # We're waiting 5 seconds, and trying again with exact same request.
+    # To prevent having infinite loops, we're trying maximum 5 times.
+    # In case that we were unable to make successfull request with that 5 tries,
+    # MaximumNumberOfRetriesReachedError is being raised.
+    #
+    # @raise RequestError if the request is not retriable
+    # @raise MaximumNumberOfRetriesReachedError if the API returned error after 5 retries
+    rescue RequestError => error
+      raise unless error.retriable?
+      raise MaximumNumberOfRetriesReachedError, self if @requests > MAX_REQUESTS
+      @requests += 1
+      sleep(5)
       retry
     end
 
