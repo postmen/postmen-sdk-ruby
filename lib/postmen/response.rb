@@ -16,10 +16,22 @@ class Postmen
       @meta ||= parsed_response[:meta]
     end
 
+    # Holds the data
+    # @see https://docs.postmen.com/#data API Documentation
+    # @return [Hash]
+    def data
+      @data ||= parsed_response[:data]
+    end
+
     # Parses the json response
     # @return [Hash]
     def parsed_response
       @parsed_response ||= JSON.parse(body, symbolize_names: true)
+    end
+
+    # Checks if response were successfull
+    def success?
+      meta[:code] == 200
     end
 
     # Checks if rate limit was exceeded

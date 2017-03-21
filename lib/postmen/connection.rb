@@ -22,45 +22,10 @@ class Postmen
     # @example
     #   .get('/labels')
     #   .get('/labels', { params: { limit: 5 } })
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
     def get(path, options = {})
-      Response.new(raw_get(path, options)).tap(&:parse_response!)
-    # Rescue from any  connection issues
-    rescue HTTP::ConnectionError
-      # Raise error if we already tried to use failover domain
-      raise if Postmen.failover?
-      # Switch to failover domain & retry the request
-      Postmen.failover!
-      retry
-    # Handle Rate limits.
-    # Rate limits are being reset every 60 seconds - we're retrying
-    # given request after that.
-    # @see https://docs.postmen.com/ratelimit.html Documentation
-    rescue RateLimitExceeded
-      @requests += 1
-      raise if @requests > MAX_REQUESTS
-      sleep(60)
-      retry
-    # If the resource was not found, simply re-raise the exception
-    rescue ResourceNotFound
-      raise
-    # Handle request errors.
-    # Our current error handling policy depends on the error type.
-    # If the API returns information, that the request is retriable,
-    # We're waiting 5 seconds, and trying again with exact same request.
-    # To prevent having infinite loops, we're trying maximum 5 times.
-    # In case that we were unable to make successfull request with that 5 tries,
-    # MaximumNumberOfRetriesReachedError is being raised.
-    #
-    # @raise RequestError if the request is not retriable
-    # @raise MaximumNumberOfRetriesReachedError if the API returned error after 5 retries
-    rescue RequestError => error
-      raise unless error.retriable?
-      raise MaximumNumberOfRetriesReachedError, self if @requests > MAX_REQUESTS
-      @requests += 1
-      sleep(5)
-      retry
+      with_error_handling do
+        Response.new(raw_get(path, options)).tap(&:parse_response!)
+      end
     end
 
     # Performs a HTTP POST request.
@@ -71,7 +36,9 @@ class Postmen
     #   .post('/labels')
     #   .post('/labels', { json: { my: { sample: :data } } })
     def post(path, options = {})
-      Response.new(raw_post(path, options))
+      with_error_handling do
+        Response.new(raw_post(path, options))
+      end
     end
 
     # Performs a HTTP PUT request.
@@ -82,7 +49,9 @@ class Postmen
     #   .put('/shipper-accounts/123/info')
     #   ..put('/shipper-accounts/123/info', { json: { my: { sample: :data } } })
     def put(path, options = {})
-      Response.new(raw_put(path, options))
+      with_error_handling do
+        Response.new(raw_put(path, options)).tap(&:parse_response!)
+      end
     end
 
     # Performs a HTTP DELETE request
@@ -117,6 +86,52 @@ class Postmen
     end
 
     private
+
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/CyclomaticComplexity
+    def with_error_handling
+      raise ArgumentError unless block_given?
+
+      begin
+        yield
+      # Rescue from any  connection issues
+      rescue HTTP::ConnectionError
+        # Raise error if we already tried to use failover domain
+        raise if Postmen.failover?
+        # Switch to failover domain & retry the request
+        Postmen.failover!
+        retry
+      # Handle Rate limits.
+      # Rate limits are being reset every 60 seconds - we're retrying
+      # given request after that.
+      # @see https://docs.postmen.com/ratelimit.html Documentation
+      rescue RateLimitExceeded
+        @requests += 1
+        raise if @requests > MAX_REQUESTS
+        sleep(60)
+        retry
+      # If the resource was not found, simply re-raise the exception
+      rescue ResourceNotFound
+        raise
+      # Handle request errors.
+      # Our current error handling policy depends on the error type.
+      # If the API returns information, that the request is retriable,
+      # We're waiting 5 seconds, and trying again with exact same request.
+      # To prevent having infinite loops, we're trying maximum 5 times.
+      # In case that we were unable to make successfull request with that 5 tries,
+      # MaximumNumberOfRetriesReachedError is being raised.
+      #
+      # @raise RequestError if the request is not retriable
+      # @raise MaximumNumberOfRetriesReachedError if the API returned error after 5 retries
+      rescue RequestError => error
+        raise unless error.retriable?
+        raise MaximumNumberOfRetriesReachedError, self if @requests > MAX_REQUESTS
+        @requests += 1
+        sleep(5)
+        retry
+      end
+    end
 
     def raw_get(path, options)
       HTTP

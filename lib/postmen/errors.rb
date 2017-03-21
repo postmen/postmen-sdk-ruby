@@ -6,7 +6,7 @@ class Postmen
   class RequestError < Error
     extend Forwardable
 
-    def_delegators :@request, :meta
+    def_delegators :@request, :meta, :data
 
     def initialize(request)
       @request = request

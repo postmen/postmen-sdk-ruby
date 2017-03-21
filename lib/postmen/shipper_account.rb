@@ -47,11 +47,27 @@ class Postmen
     #
     # @see https://docs.postmen.com/api.html#shipper-accounts-update-a-shipper-account-credentials
     # @return [ShipperAccount] Updated ShipperAccount resource
-    def update_credentials(params = {})
-      Connection.new.put(
+    # @raise [RequestError]
+    def update_credentials!(params = {})
+      response = Connection.new.put(
         "/shipper-accounts/#{@id}/credentials",
-        ShipperAccountUpdateCredentialsQuery.new(params).to_hash
+        ShipperAccountUpdateCredentialsQuery.new(params).to_query
       )
+
+      raise RequestError, response unless response.success?
+
+      ShipperAccount.new(response.data)
+    end
+
+    # Update a ShipperAccount credentials
+    #
+    # @see https://docs.postmen.com/api.html#shipper-accounts-update-a-shipper-account-credentials
+    # @return [ShipperAccount] Updated ShipperAccount resource
+    # @return [Hash] a Hash with detailed information about what went wrong
+    def update_credentials(params = {})
+      update_credentials!(params)
+    rescue RequestError => error
+      error.meta
     end
 
     # Update a shipper account information
@@ -61,11 +77,30 @@ class Postmen
     #   .update(description: "Your new description")
     #   .update(address: {})
     # @return [ShipperAccount] Updated ShipperAccount resource
-    def update(params = {})
-      Connection.new.put(
+    # @raise [RequestError]
+    def update!(params = {})
+      response = Connection.new.put(
         "/shipper-accounts/#{@id}/info",
         ShipperAccountUpdateQuery.new(params.merge(subject: self)).to_query
       )
+
+      raise RequestError, response unless response.success?
+
+      ShipperAccount.new(response.data)
+    end
+
+    # Update a shipper account information
+    #
+    # @see https://docs.postmen.com/api.html#shipper-accounts-update-a-shipper-account-information API Documentation
+    # @example
+    #   .update(description: "Your new description")
+    #   .update(address: {})
+    # @return [ShipperAccount] Updated ShipperAccount resource
+    # @return [Hash] a Hash with detailed information about what went wrong
+    def update(params = {})
+      update!(params)
+    rescue RequestError => error
+      error.meta
     end
   end
 end
