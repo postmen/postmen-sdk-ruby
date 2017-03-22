@@ -1,4 +1,4 @@
 class Postmen
   # SDK Version
-  VERSION = '1.0.0-alpha.2'.freeze
+  VERSION = '1.0.0'.freeze
 end
