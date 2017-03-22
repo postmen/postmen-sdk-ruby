@@ -7,7 +7,7 @@ class Postmen
     attribute :status, Types::ManifestStatuses
     attribute :shipper_account, Types::Reference
     attribute :labels, Types::Array.member(Types::ManifestingLabel)
-    attribute :files, Types::Hash # TODO: Implement Files Type
+    attribute :files, Types::File
     attribute :created_at, Types::DateTime
     attribute :updated_at, Types::DateTime
 
