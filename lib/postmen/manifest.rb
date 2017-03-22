@@ -6,7 +6,7 @@ class Postmen
     attribute :id, Types::UUID
     attribute :status, Types::ManifestStatuses
     attribute :shipper_account, Types::Reference
-    attribute :labels, Types::Array # TODO: implement manifesting label type
+    attribute :labels, Types::Array.member(Types::ManifestingLabel)
     attribute :files, Types::Hash # TODO: Implement Files Type
     attribute :created_at, Types::DateTime
     attribute :updated_at, Types::DateTime
