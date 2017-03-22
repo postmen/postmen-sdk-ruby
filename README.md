@@ -12,18 +12,13 @@ Ruby Gem for Postmen API.
 
 This extension helps developers to integrate with Postmen easily.
 
-## Early development stage
-
-This gem is on early stage of development - There are a lot of features that are not covered yet, you may also expect heavy changes in the public API, before we hit version `1.0.0` (see the Milestones section)
-
-
 
 ## Installation
 
 1. Add the following line to your application's Gemfile
 
     ```
-    gem "postmen", "~> 0.1.0"
+    gem 'postmen', '~> 1.0'
     ```
 
 2. Run bundler
@@ -44,12 +39,13 @@ end
 
 ```
 
-## Usage
+## Getting started
 
 ```ruby
 require 'postmen'
 
-# Configure postmen first, see Configuration section
+# Setup your postmen account (https://postmen.com), obtain an API key.
+# Configure Postmen, see Configuration section
 
 ### Fetch all labels:
 
@@ -65,34 +61,12 @@ Postmen::Label.all(status: 'created')
 
 Postmen::Label.find('1111') # Returns an instance of Postmen::Label
 ```
+### Documentation
 
-### Label
-
-An instance of `Postmen::Label` responds to following methods:
-
-`id`,
-`status`,
-`tracking_numbers`
-`files`,
-`rate`
-
-### LabelCollection
-
-`Postmen::LabelCollection` acts as an Array of `Label` instances. You can do things like:
-
-```ruby
-collection = Postmen::Label.all 
-
-collection.first # Returns an instance of Label
-collection.size # Returns number of elements returned
-collection.each{|label| puts label.inspect } # Iterates over labels
-collection.select{|label|  } # Selects labels by given criteria
-```
-and so on.
+- <a href="https://docs.postmen.com"> API documentation/overview</a>
+- <a href="https://github.com/krzyzak/postmen-example-app/"> Example App</a>
+- <a href="http://www.rubydoc.info/github/postmen/postmen-sdk-ruby">Ruby technical documentation</a>
 
 ## The License (MIT)
 
 Released under the MIT license. See the LICENSE file for the complete wording.
-
-
-## Contributor
