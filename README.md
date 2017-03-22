@@ -12,6 +12,12 @@ Ruby Gem for Postmen API.
 
 This extension helps developers to integrate with Postmen easily.
 
+## Resources
+
+- <a href="https://docs.postmen.com"> API documentation/overview</a>
+- <a href="https://github.com/krzyzak/postmen-example-app/"> Example App</a>
+- <a href="http://www.rubydoc.info/github/postmen/postmen-sdk-ruby">Ruby technical documentation</a>
+
 
 ## Installation
 
@@ -61,11 +67,6 @@ Postmen::Label.all(status: 'created')
 
 Postmen::Label.find('1111') # Returns an instance of Postmen::Label
 ```
-### Documentation
-
-- <a href="https://docs.postmen.com"> API documentation/overview</a>
-- <a href="https://github.com/krzyzak/postmen-example-app/"> Example App</a>
-- <a href="http://www.rubydoc.info/github/postmen/postmen-sdk-ruby">Ruby technical documentation</a>
 
 ## The License (MIT)
 
