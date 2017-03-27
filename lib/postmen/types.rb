@@ -38,8 +38,16 @@ class Postmen
       'residential'
     )
 
+    # List of possible Shipper Account Statuses
+    ShipperAccountStatus = Types::String.enum(
+      'enabled',
+      'disabled',
+      'deleted'
+    )
+
     # List of possible Shipper Account Types
     ShipperAccountTypes = Types::String.enum(
+      'default',
       'user',
       'user_prepaid'
     )

@@ -6,6 +6,7 @@ class Postmen
     attribute :id, Types::UUID
     attribute :address, Types::Address
     attribute :slug, Types::String
+    attribute :status, Types::ShipperAccountStatus
     attribute :description, Types::String
     attribute :type, Types::ShipperAccountTypes
     attribute :timezone, Types::Timezone
