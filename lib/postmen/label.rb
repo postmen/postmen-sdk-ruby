@@ -8,7 +8,8 @@ class Postmen
     attribute :tracking_numbers, Types::Array.member(Types::String)
     attribute :files, Types::Strict::Nil | Types::Array.member(Types::Hash)
     attribute :rate, Types::Strict::Nil | Types::Hash
-
+    attribute :created_at, Types::Strict::Nil | Types::DateTime
+    attribute :updated_at, Types::Strict::Nil | Types::DateTime
     # Returns all labels
     #
     # @see LabelCollection#all
