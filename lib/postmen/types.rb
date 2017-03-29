@@ -2,6 +2,16 @@
 Dry::Types.load_extensions(:maybe)
 
 class Postmen
+
+  PAPER_SIZES = [
+    '4x4',
+    '4x6',
+    '4x6.75',
+    '4x8',
+    '6x4',
+    'a4',
+    'default'
+  ].freeze
   # This module holds all definitions of simple types used in the API
   module Types
     include Dry::Types.module
@@ -59,15 +69,7 @@ class Postmen
     Country = Types::String
 
     # Paper size
-    PaperSize = Types::String.enum(
-      '4x4',
-      '4x6',
-      '4x6.75',
-      '4x8',
-      '6x4',
-      'a4',
-      'default'
-    )
+    PaperSize = Types::String.enum(PAPER_SIZES)
 
     # Purpose used in customs object
     #
