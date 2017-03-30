@@ -3,7 +3,7 @@ class Postmen
   #
   # @see https://docs.postmen.com/api.html#labels API documentation
   class Label < Dry::Struct
-    attribute :id, Types::UUID
+    attribute :id, Types::Strict::Nil | Types::UUID
     attribute :status, Types::String
     attribute :tracking_numbers, Types::Array.member(Types::String)
     attribute :files, Types::Strict::Nil | Types::Array.member(Types::Hash)
